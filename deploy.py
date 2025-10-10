@@ -1,7 +1,9 @@
 from os import path
 
 from pyinfra import host, local
-from pyinfra.operations import apt, files, git, pip, server, systemd
+from pyinfra.operations import apt, files, server
+from pyinfra.facts.server import Arch, Command
+
 
 
 # Install prerequisite packages 
@@ -22,14 +24,7 @@ server.shell(
 )
 
 
-arch_result = server.shell(
-    name="Récupérer l'architecture système",
-    commands=["dpkg --print-architecture"],
-    get_stdout=True,
-)
-
-ARCH = arch_result.stdout[0] if arch_result.stdout else "amd64"  # fallback
-
+ARCH = host.get_fact(Command, "dpkg --print-architecture")
 
 clickhouse_repo_line = (
     f"deb [signed-by=/usr/share/keyrings/clickhouse-keyring.gpg arch={ARCH}] "
@@ -40,7 +35,7 @@ files.line(
     name="Ajouter le dépôt ClickHouse dans apt sources",
     path="/etc/apt/sources.list.d/clickhouse.list",
     line=clickhouse_repo_line,
-    create=True,
+    # create=True,
 )
 
 # 5. Mettre à jour les paquets apt
