@@ -1,13 +1,13 @@
 inventory = (
     # Individual host list with host-specific data
     [
-        ("host1", {"ssh_port": 9022, "is_clickHouse": True}),
-        ("host2", {"ssh_port": 9023, "is_clickHouse": True}),
-        ("host3", {"ssh_port": 9024, "is_clickHouse": True}),
-        ("host4", {"ssh_port": 9025, "is_clickHouse": True}),
-        ("host5", {"ssh_port": 9026, "is_keeper": True}),
-        ("host6", {"ssh_port": 9027, "is_keeper": True}),
-        ("host7", {"ssh_port": 9028, "is_keeper": True}),
+        ("clickhouse-01", {"ssh_port": 9022, "is_clickHouse": True}),
+        ("clickhouse-02", {"ssh_port": 9023, "is_clickHouse": True}),
+        ("clickhouse-03", {"ssh_port": 9024, "is_clickHouse": True}),
+        ("clickhouse-04", {"ssh_port": 9025, "is_clickHouse": True}),
+        ("clickhouse-keeper-01", {"ssh_port": 9026, "is_clickHouseKeeper": True}),
+        ("clickhouse-keeper-02", {"ssh_port": 9027, "is_clickHouseKeeper": True}),
+        ("clickhouse-keeper-03", {"ssh_port": 9028, "is_clickHouseKeeper": True}),
     ],
     # Shared data for all the hosts in the group
     {

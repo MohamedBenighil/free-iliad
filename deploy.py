@@ -2,7 +2,7 @@ from os import path
 
 from pyinfra import host, local
 from pyinfra.operations import apt, files, server
-from pyinfra.facts.server import Arch, Command
+from pyinfra.facts.server import  Command
 
 
 
@@ -10,7 +10,7 @@ from pyinfra.facts.server import Arch, Command
 apt.packages(
     name="Installer les packages nécessaires pour les dépôts HTTPS",
     packages=["apt-transport-https", "ca-certificates", "curl", "gnupg"],
-    update=True,
+    # update=True,
     cache_time=3600,
 )
 
@@ -21,6 +21,7 @@ server.shell(
         "curl -fsSL 'https://packages.clickhouse.com/rpm/lts/repodata/repomd.xml.key' "
         "| gpg --dearmor | sudo tee /usr/share/keyrings/clickhouse-keyring.gpg > /dev/null"
     ],
+
 )
 
 
@@ -31,23 +32,31 @@ clickhouse_repo_line = (
     "https://packages.clickhouse.com/deb stable main"
 )
 
-files.line(
+# files.line(
+#     name="Ajouter le dépôt ClickHouse dans apt sources",
+#     path="/etc/apt/sources.list.d/clickhouse.list",
+#     line=clickhouse_repo_line,
+#     # create=True,
+#     # present=False,
+# )
+
+apt.repo(
     name="Ajouter le dépôt ClickHouse dans apt sources",
-    path="/etc/apt/sources.list.d/clickhouse.list",
-    line=clickhouse_repo_line,
-    # create=True,
+    src=clickhouse_repo_line,
+    filename="clickhouse",
 )
 
 # 5. Mettre à jour les paquets apt
 apt.update(
     name="Mettre à jour la liste des paquets apt",
+    cache_time=3600,
 )
 
 
 
-#if host.data.get("is_database"):
-#    local.include(filename=path.join("tasks", "database.py"))
+if host.data.get("is_clickHouse"):
+   local.include(filename=path.join("tasks", "clickhouse-server.py"))
+
 #
-#
-#if host.data.get("is_web"):
-#    local.include(filename=path.join("tasks", "web.py"))
+if host.data.get("is_clickHouseKeeper"):
+   local.include(filename=path.join("tasks", "clickhouse-keeper.py"))
