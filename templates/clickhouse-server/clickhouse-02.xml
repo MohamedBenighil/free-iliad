@@ -1,0 +1,8 @@
+
+
+<yandex>
+    <macros replace="true">
+        <shard>02</shard>
+        <replica>01</replica>
+    </macros>
+</yandex>

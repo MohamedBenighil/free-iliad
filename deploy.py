@@ -44,10 +44,9 @@ apt.update(
 
 
 if host.data.get("is_clickHouseKeeper"):
-   local.include(filename=path.join("tasks", "clickhouse-keeper.py"))
+    local.include(filename=path.join("tasks", "clickhouse-keeper.py"))
 
 if host.data.get("is_clickHouse"):
-   local.include(filename=path.join("tasks", "clickhouse-server.py"))
-
+    local.include(filename=path.join("tasks", "clickhouse-server.py"))
 
 
