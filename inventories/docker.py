@@ -16,12 +16,5 @@ inventory = (
             "ssh_hostname": "localhost",
             "ssh_user": "pyinfra",
             "ssh_key": "./.docker/insecure_private_key",
-            # "ssh_known_hosts_file": "/dev/null",
-            # This is insecure, don't use in production!
-            # "ssh_strict_host_key_checking": "off",
         },
     )
-
-
-    #insecure_private_key
-    #insecure_private_key.pub

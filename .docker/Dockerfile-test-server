@@ -4,7 +4,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # Install systemd + sudo + basics
 RUN apt-get update
-RUN apt-get install -y --no-install-recommends software-properties-common systemd systemd-cron sudo openssh-server
+RUN apt-get install -y --no-install-recommends software-properties-common systemd systemd-cron sudo openssh-server vim
 
 # Setup systemd to run within Docker (requires cgroupsv2)
 RUN rm -f /lib/systemd/system/systemd*udev*

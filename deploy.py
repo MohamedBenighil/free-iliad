@@ -1,7 +1,6 @@
 from os import path
-
 from pyinfra import host, local
-from pyinfra.operations import apt, files, server
+from pyinfra.operations import apt, server
 from pyinfra.facts.server import  Command
 
 
@@ -9,14 +8,14 @@ from pyinfra.facts.server import  Command
 ARCH = host.get_fact(Command, "dpkg --print-architecture")
 
 apt.packages(
-    name="Installer les packages nécessaires pour les dépôts HTTPS",
+    name="Install prerequisite packages",
     packages=["apt-transport-https", "ca-certificates", "curl", "gnupg"],
     cache_time=3600,
 )
 
 
 server.shell(
-    name="Télécharger la clé GPG de ClickHouse",
+    name="Download the ClickHouse GPG key and store it in the keyring",
     commands=[
         "curl -fsSL 'https://packages.clickhouse.com/rpm/lts/repodata/repomd.xml.key' "
         "| gpg --dearmor | sudo tee /usr/share/keyrings/clickhouse-keyring.gpg > /dev/null"
@@ -30,17 +29,16 @@ clickhouse_repo_line = (
 )
 
 apt.repo(
-    name="Ajouter le dépôt ClickHouse dans apt sources",
+    name="Add the ClickHouse repository to apt sources",
     src=clickhouse_repo_line,
     filename="clickhouse",
 )
 
 
 apt.update(
-    name="Mettre à jour la liste des packages apt",
+    name="Update apt package lists",
     cache_time=3600,
 )
-
 
 
 if host.data.get("is_clickHouseKeeper"):
