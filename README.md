@@ -61,7 +61,7 @@ WHERE path IN ('/', '/clickhouse')
 ########### CREATE & QUERY DATA ########### 
 ###########################################
 
-# create ReplicatedMergeTree table in 2 replicas
+# create ReplicatedMergeTree table in 2 replicas (e.g: clickhouse-01 & clickhouse-03 OR clickhouse-02 & clickhouse-04 )
 CREATE TABLE default.test_table
 (
     id UInt64,
