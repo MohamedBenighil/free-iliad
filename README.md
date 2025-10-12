@@ -14,6 +14,10 @@ This example sets up 7 servers : 4 clikhouse and 3 keeper. The clickhouse instan
 # Run pyinfra against them 
 pyinfra inventories/docker.py deploy.py
 
+# P.S: If you get a set of errors like : SSH host key error (Host key for localhost does not match.) :
+> ~/.ssh/known_hosts
+
+
 # Ssh to one of clickhouse servers (clickhouse-01, clickhouse-02, clickhouse-03 or clickhouse-04)
 ssh -i ./.docker/insecure_private_key pyinfra@localhost -p 9022 
 
