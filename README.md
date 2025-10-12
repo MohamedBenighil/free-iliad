@@ -29,7 +29,6 @@ clickhouse-01 :) SELECT
     port
 FROM system.clusters;
 
-
    ┌─cluster────────────┬─shard_num─┬─replica_num─┬─host_name─────┬─port─┐
 1. │ cluster_free_iliad │         1 │           1 │ clickhouse-01 │ 9000 │
 2. │ cluster_free_iliad │         1 │           2 │ clickhouse-03 │ 9000 │
@@ -37,6 +36,7 @@ FROM system.clusters;
 4. │ cluster_free_iliad │         2 │           2 │ clickhouse-04 │ 9000 │
 5. │ default            │         1 │           1 │ localhost     │ 9000 │
    └────────────────────┴───────────┴─────────────┴───────────────┴──────┘
+
 
 # check the status of the ClickHouse Keeper cluster
 clickhouse-01 :) SELECT *
@@ -52,11 +52,16 @@ WHERE path IN ('/', '/clickhouse')
 
 
 
+
+
+
+
+
 ###########################################
 ########### CREATE & QUERY DATA ########### 
 ###########################################
 
-# Create the table in 2 repilicas 
+# create ReplicatedMergeTree table in 2 replicas
 CREATE TABLE default.test_table
 (
     id UInt64,
@@ -69,6 +74,24 @@ ENGINE = ReplicatedMergeTree(
 ORDER BY id; 
 
 
+# Insert data (in one replicas: e.g: clickhouse-01 server)
+INSERT INTO default.test_table VALUES (1, 'Mohamed01'), (2, 'Mohamed02');
+
+# Read request from clickhouse-01
+SELECT * FROM default.test_table;
+   ┌─id─┬─name──────┐
+1. │  1 │ Mohamed01 │
+2. │  2 │ Mohamed02 │
+   └────┴───────────┘
+
+# Stop clickhouse-01 server
+
+
+# Read request from clickhouse-03 server (You git the same result )
+   ┌─id─┬─name──────┐
+1. │  1 │ Mohamed01 │
+2. │  2 │ Mohamed02 │
+   └────┴───────────┘
 
 # Delete Docker containers (infrastructure)
 ./docker-stop.sh
