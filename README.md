@@ -51,6 +51,25 @@ WHERE path IN ('/', '/clickhouse')
    └────────────┴───────┴─────────────┘
 
 
-# Delete Docker containers 
+
+###########################################
+########### CREATE & QUERY DATA ########### 
+###########################################
+
+# Create the table in 2 repilicas 
+CREATE TABLE default.test_table
+(
+    id UInt64,
+    name String
+)
+ENGINE = ReplicatedMergeTree(
+    '/clickhouse/tables/cluster_free_iliad/01/test_table',  
+    '{replica}' 
+)
+ORDER BY id; 
+
+
+
+# Delete Docker containers (infrastructure)
 ./docker-stop.sh
 ```

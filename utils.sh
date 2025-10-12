@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOCKER_TEST_IMAGE_NAME="pyinfra-examples-docker-test-image"
+DOCKER_TEST_IMAGE_NAME="pyinfra-free-iliad-docker-test-image"
 
 function ensure_test_container() {
     docker image inspect $DOCKER_TEST_IMAGE_NAME > /dev/null 2>&1 && return 0
