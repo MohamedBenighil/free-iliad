@@ -9,7 +9,7 @@ This example sets up 7 servers : 4 clikhouse and 3 keeper. The clickhouse instan
 
 ```sh
 # Start Docker containers : infrastructure with 7 nodes
-docker/docker-start.sh
+infra_docker/docker-start.sh
 
 # Run pyinfra against them 
 pyinfra inventories/docker.py deploy.py
@@ -33,14 +33,13 @@ clickhouse-01 :) SELECT
     port
 FROM system.clusters;
 
-   ┌─cluster────────────┬─shard_num─┬─replica_num─┬─host_name─────┬─port─┐
-1. │ cluster_free_iliad │         1 │           1 │ clickhouse-01 │ 9000 │
-2. │ cluster_free_iliad │         1 │           2 │ clickhouse-03 │ 9000 │
-3. │ cluster_free_iliad │         2 │           1 │ clickhouse-02 │ 9000 │
-4. │ cluster_free_iliad │         2 │           2 │ clickhouse-04 │ 9000 │
-5. │ default            │         1 │           1 │ localhost     │ 9000 │
-   └────────────────────┴───────────┴─────────────┴───────────────┴──────┘
-
+   ┌─cluster────────────┬─shard_num─┬─replica_num─┬─host_name────────────────────┬─port─┐
+1. │ cluster_free_iliad │         1 │           1 │ clickhouse-01.free-iliad.com │ 9000 │
+2. │ cluster_free_iliad │         1 │           2 │ clickhouse-03.free-iliad.com │ 9000 │
+3. │ cluster_free_iliad │         2 │           1 │ clickhouse-02.free-iliad.com │ 9000 │
+4. │ cluster_free_iliad │         2 │           2 │ clickhouse-04.free-iliad.com │ 9000 │
+5. │ default            │         1 │           1 │ localhost                    │ 9000 │
+   └────────────────────┴───────────┴─────────────┴──────────────────────────────┴──────┘
 
 # check the status of the ClickHouse Keeper cluster
 clickhouse-01 :) SELECT *
@@ -76,7 +75,7 @@ ENGINE = ReplicatedMergeTree(
     '{replica}' 
 )
 ORDER BY id; 
-
+clic
 
 # Insert data (in one replicas: e.g: clickhouse-01 server)
 INSERT INTO default.test_table VALUES (1, 'Mohamed01'), (2, 'Mohamed02');
@@ -98,5 +97,5 @@ SELECT * FROM default.test_table;
    └────┴───────────┘
 
 # Delete Docker containers (infrastructure)
-./docker-stop.sh
+infra_docker/docker-stop.sh
 ```
