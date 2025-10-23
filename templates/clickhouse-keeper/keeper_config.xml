@@ -7,17 +7,17 @@
         <raft_configuration>
             <server>
                 <id>01</id>
-                <hostname>clickhouse-keeper-01</hostname>
+                <hostname>clickhouse-keeper-01.free-iliad.com</hostname>
                 <port>9234</port>
             </server>
             <server>
                 <id>02</id>
-                <hostname>clickhouse-keeper-02</hostname>
+                <hostname>clickhouse-keeper-02.free-iliad.com</hostname>
                 <port>9234</port>
             </server>
             <server>
                 <id>03</id>
-                <hostname>clickhouse-keeper-03</hostname>
+                <hostname>clickhouse-keeper-03.free-iliad.com</hostname>
                 <port>9234</port>
             </server>
         </raft_configuration>

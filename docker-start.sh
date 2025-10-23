@@ -11,13 +11,13 @@ echo "Create Docker network..."
 docker network create "$DOCKER_TEST_NETWORK_NAME"
 
 echo "Starting Docker containers..."
-run_test_container clickhouse-01 -p 9022:22
-run_test_container clickhouse-02 -p 9023:22
-run_test_container clickhouse-03 -p 9024:22
-run_test_container clickhouse-04 -p 9025:22
-run_test_container clickhouse-keeper-01 -p 9026:22
-run_test_container clickhouse-keeper-02 -p 9027:22
-run_test_container clickhouse-keeper-03 -p 9028:22
+run_test_container clickhouse-01.free-iliad.com -p 9022:22
+run_test_container clickhouse-02.free-iliad.com -p 9023:22
+run_test_container clickhouse-03.free-iliad.com -p 9024:22
+run_test_container clickhouse-04.free-iliad.com -p 9025:22
+run_test_container clickhouse-keeper-01.free-iliad.com -p 9026:22
+run_test_container clickhouse-keeper-02.free-iliad.com -p 9027:22
+run_test_container clickhouse-keeper-03.free-iliad.com -p 9028:22
 
 echo
 echo "Doker containers are now ready to run the pyinfra deploy, you can do this by running:"

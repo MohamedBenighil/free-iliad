@@ -6,22 +6,22 @@
             <shard>
                 <internal_replication>true</internal_replication>
                 <replica>
-                    <host>clickhouse-01</host>
+                    <host>clickhouse-01.free-iliad.com</host>
                     <port>9000</port>
                 </replica>
                 <replica>
-                    <host>clickhouse-03</host>
+                    <host>clickhouse-03.free-iliad.com</host>
                     <port>9000</port>
                 </replica>
             </shard>
             <shard>
                 <internal_replication>true</internal_replication>
                 <replica>
-                    <host>clickhouse-02</host>
+                    <host>clickhouse-02.free-iliad.com</host>
                     <port>9000</port>
                 </replica>
                 <replica>
-                    <host>clickhouse-04</host>
+                    <host>clickhouse-04.free-iliad.com</host>
                     <port>9000</port>
                 </replica>
             </shard>
@@ -29,15 +29,15 @@
     </remote_servers>
     <zookeeper>
         <node>
-            <host>clickhouse-keeper-01</host>
+            <host>clickhouse-keeper-01.free-iliad.com</host>
             <port>9181</port>
         </node>
         <node>
-            <host>clickhouse-keeper-02</host>
+            <host>clickhouse-keeper-02.free-iliad.com</host>
             <port>9181</port>
         </node>
         <node>
-            <host>clickhouse-keeper-03</host>
+            <host>clickhouse-keeper-03.free-iliad.com</host>
             <port>9181</port>
         </node>
     </zookeeper>

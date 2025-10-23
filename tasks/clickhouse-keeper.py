@@ -23,7 +23,7 @@ generate_unit = files.line(
     path="/etc/clickhouse-keeper/keeper_config.d/config.xml",
     line="<server_id></server_id>",
     # id = hostname's last 2 chars
-    replace=f"<server_id>{host.name[-2:]}</server_id>",
+    replace=f"<server_id>{host.name.split('.')[0][-2:]}</server_id>",
 )
 
 systemd.service(
