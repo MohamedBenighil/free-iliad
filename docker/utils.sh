@@ -4,7 +4,7 @@ DOCKER_TEST_IMAGE_NAME="pyinfra-free-iliad-docker-test-image"
 
 function ensure_test_container() {
     docker image inspect $DOCKER_TEST_IMAGE_NAME > /dev/null 2>&1 && return 0
-    docker_dir=$(realpath "$(realpath "$(dirname "${BASH_SOURCE[0]}")")/.docker")
+    docker_dir=$(realpath "$(realpath "$(dirname "${BASH_SOURCE[0]}")")")
     cd "$docker_dir" || return 1
     docker build -f Dockerfile-test-server -t $DOCKER_TEST_IMAGE_NAME .
 }

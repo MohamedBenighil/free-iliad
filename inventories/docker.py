@@ -15,6 +15,6 @@ inventory = (
             # SSH details matching the Docker container started in ./docker-start.sh
             "ssh_hostname": "localhost",
             "ssh_user": "pyinfra",
-            "ssh_key": "./.docker/insecure_private_key",
+            "ssh_key": "./.ssh/insecure_private_key",
         },
     )

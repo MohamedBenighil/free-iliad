@@ -9,7 +9,7 @@ This example sets up 7 servers : 4 clikhouse and 3 keeper. The clickhouse instan
 
 ```sh
 # Start Docker containers : infrastructure with 7 nodes
-./docker-start.sh
+docker/docker-start.sh
 
 # Run pyinfra against them 
 pyinfra inventories/docker.py deploy.py
@@ -19,7 +19,7 @@ pyinfra inventories/docker.py deploy.py
 
 
 # Ssh to one of clickhouse servers (clickhouse-01, clickhouse-02, clickhouse-03 or clickhouse-04)
-ssh -i ./.docker/insecure_private_key pyinfra@localhost -p 9022 
+ssh -i ./.ssh/insecure_private_key pyinfra@localhost -p 9022 
 
 # Run clickhouse client 
 pyinfra@clickhouse-01:~$ clickhouse-client

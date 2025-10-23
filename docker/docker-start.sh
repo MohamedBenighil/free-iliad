@@ -22,6 +22,6 @@ run_test_container clickhouse-keeper-03.free-iliad.com -p 9028:22
 echo
 echo "Doker containers are now ready to run the pyinfra deploy, you can do this by running:"
 echo
-echo "    pyinfra inventories/docker.py deploy.py"
+echo "    pyinfra ./inventories/docker.py deploy.py"
 echo
 echo "Once complete, don't forget to remove the Docker containers and network using the ./docker-stop.sh script!"
