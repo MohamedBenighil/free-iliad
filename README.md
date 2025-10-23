@@ -7,19 +7,56 @@ This example sets up 7 servers : 4 clikhouse and 3 keeper. The clickhouse instan
 + `tasks/clickhouse-keeper.py` - keeper servers setup
 + `tasks/clickhouse-server.py` - clickhouse servers setup
 
+
+
+# Infrastructure with Docker 
 ```sh
 # Start Docker containers : infrastructure with 7 nodes
 infra_docker/docker-start.sh
 
-# Run pyinfra against them 
+# install ClicHouse 
 pyinfra inventories/docker.py deploy.py
 
 # P.S: If you get a set of errors like : SSH host key error (Host key for localhost does not match.) :
-> ~/.ssh/known_hosts
-
 
 # Ssh to one of clickhouse servers (clickhouse-01, clickhouse-02, clickhouse-03 or clickhouse-04)
 ssh -i ./.ssh/insecure_private_key pyinfra@localhost -p 9022 
+> ~/.ssh/known_hosts
+```
+
+# Infrastructure with Terraform (aws)
+```sh
+# change directory to infra_aws_terraform
+cd infra_aws_terraform
+
+# downloads providers and modules
+terraform init
+
+# provision the infrastructure 
+terraform apply -auto-approve 
+
+# ssh to jump server 
+
+# install PyInfra 
+curl -LsSf https://astral.sh/uv/install.sh | sh
+export PATH="$HOME/.local/bin:$PATH"
+uv tool install pyinfra
+
+# clone the code from git 
+git clone https://github.com/MohamedBenighil/free-iliad.git
+
+# install ClicHouse 
+pyinfra inventories/aws.py deploy.py
+
+# ssh 
+ssh -i ./.ssh/insecure_private_key ubuntu@clickhouse-01.free-iliad.com
+
+
+```
+
+# ClickHouse 
+```sh
+
 
 # Run clickhouse client 
 pyinfra@clickhouse-01:~$ clickhouse-client
@@ -52,11 +89,6 @@ WHERE path IN ('/', '/clickhouse')
 3. │ keeper     │       │ /           │
 4. │ clickhouse │       │ /           │
    └────────────┴───────┴─────────────┘
-
-
-
-
-
 
 
 
