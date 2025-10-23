@@ -18,7 +18,7 @@ module "security_group" {
 module "virtual_machine" {
   source        = "./virtual_machine"
   ami_id        = var.ec2_ami_id
-  instance_type = "t3.micro"
+  instance_type = "c7i-flex.large"
 
   for_each                      = toset(var.vms_names)
   public_key                    = var.public_key

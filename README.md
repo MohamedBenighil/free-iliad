@@ -36,6 +36,7 @@ terraform init
 terraform apply -auto-approve 
 
 # ssh to jump server 
+terraform output
 
 # install PyInfra 
 curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -49,6 +50,7 @@ git clone https://github.com/MohamedBenighil/free-iliad.git
 pyinfra inventories/aws.py deploy.py
 
 # ssh 
+chmod 400 ./.ssh/insecure_private_key
 ssh -i ./.ssh/insecure_private_key ubuntu@clickhouse-01.free-iliad.com
 
 
@@ -103,14 +105,14 @@ CREATE TABLE default.test_table
     name String
 )
 ENGINE = ReplicatedMergeTree(
-    '/clickhouse/tables/cluster_free_iliad/01/test_table',  
+    '/clickhouse/tables/cluster_free_iliad/02/test_table',  
     '{replica}' 
 )
 ORDER BY id; 
-clic
+
 
 # Insert data (in one replicas: e.g: clickhouse-01 server)
-INSERT INTO default.test_table VALUES (1, 'Mohamed01'), (2, 'Mohamed02');
+   INSERT INTO default.test_table VALUES (1, 'Mohamed01'), (2, 'Mohamed02');
 
 # Read request from clickhouse-01
 SELECT * FROM default.test_table;
