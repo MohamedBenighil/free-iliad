@@ -22,7 +22,7 @@ generate_unit = files.line(
     name="Set specific config : Set unique server id",
     path="/etc/clickhouse-keeper/keeper_config.d/config.xml",
     line="<server_id></server_id>",
-    # id = hostname's last 2 chars
+    # id = hostname's  2 number
     replace=f"<server_id>{host.name.split('.')[0][-2:]}</server_id>",
 )
 
